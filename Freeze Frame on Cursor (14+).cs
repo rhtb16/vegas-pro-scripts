@@ -33,6 +33,15 @@ public class EntryPoint {
                             videoEvent.Envelopes.FindByType(EnvelopeType.Velocity).Points.Add(freezeEnvelope);
                             videoEvent.Envelopes.FindByType(EnvelopeType.Velocity).Points[0].Curve = CurveType.None;       
                             videoEvent.Envelopes.FindByType(EnvelopeType.Velocity).Points[0].Y = 1;
+                        } else {
+                            if (!videoEvent.Envelopes.HasEnvelope(EnvelopeType.Velocity)){
+                                Envelope envelope = new Envelope(EnvelopeType.Velocity);
+                                videoEvent.Envelopes.Add(envelope);
+                                videoEvent.Envelopes.FindByType(EnvelopeType.Velocity).Points[0].Y = 0;
+                            } else{
+                                videoEvent.Envelopes.FindByType(EnvelopeType.Velocity).Points.Clear();
+                                videoEvent.Envelopes.FindByType(EnvelopeType.Velocity).Points[0].Y = 0;
+                            }   
                         }
                     }
                 }
